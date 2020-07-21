@@ -12,11 +12,30 @@ Rode este comando para gerar um APP_KEY no arquivo .env
 adonis key:generate
 ```
 
+Exemplo de .env:
+
+```
+HOST=127.0.0.1
+PORT=3333
+NODE_ENV=development
+APP_URL=http://${HOST}:${PORT}
+CACHE_VIEWS=false
+APP_KEY=nzHxSXHrKKlxSreq8AAYrIyqpdKA6NKT
+DB_CONNECTION=pg
+DB_HOST=127.0.0.1
+DB_PORT=5432
+DB_USER=postgres
+DB_PASSWORD=postgres
+DB_DATABASE=postgres
+SESSION_DRIVER=cookie
+HASH_DRIVER=bcrypt
+```
+
 depois rode um `npm install`.
 
 ### Migrations
 
-Run the following command to run startup migrations.
+Rode este comando para crias as tabelas no banco
 
 ```js
 adonis migration:run

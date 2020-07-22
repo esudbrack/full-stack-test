@@ -40,3 +40,7 @@ Rode este comando para crias as tabelas no banco
 ```js
 adonis migration:run
 ```
+
+### Debug
+
+Foi adicionado um launcher de debug do vscode com nodemon e um script debug no package.json `npm run debug`

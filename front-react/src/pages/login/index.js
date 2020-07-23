@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Layout, Row, Col } from "antd";
 import { Form, Input, Button, Card, Alert } from "antd";
 import api from "../../services/api";
+import { Redirect } from "react-router-dom";
 
 const { Content } = Layout;
 
@@ -27,9 +28,13 @@ const tabList = [
 ];
 
 export default function Login() {
+  const [redirect, setRedirect] = useState(false);
   const [key, setKey] = useState("login");
   const [loading, setLoading] = useState(false);
+  // Alert
   const [showAlert, setShowAlert] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("");
+  const [alertType, setAlertType] = useState("");
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -104,10 +109,13 @@ export default function Login() {
             .then((res) => {
               setLoading(false);
               localStorage.setItem("token", res.data.token);
-              // window.location.href = "/";
+              setRedirect(true);
             })
             .catch((err) => {
               setLoading(false);
+              setAlertMessage("Email/Password invalid");
+              setAlertType("error");
+              setShowAlert(true);
             });
         }}
         // onFinishFailed={onFinishFailed}
@@ -135,6 +143,10 @@ export default function Login() {
             .then((res) => {
               setLoading(false);
               setShowAlert(true);
+              setAlertMessage(
+                "User registered with success! You may now login your account."
+              );
+              setAlertType("success");
             })
             .catch((err) => {
               setLoading(false);
@@ -157,9 +169,10 @@ export default function Login() {
 
   return (
     <>
+      {redirect && <Redirect to="/" />}
       <Layout>
         <Content>
-          <Row align={"middle"} justify={"center"} style={{ marginTop: "25%" }}>
+          <Row align={"middle"} justify={"center"} style={{ marginTop: "15%" }}>
             <Col span={16}>
               <Card
                 hoverable
@@ -171,8 +184,8 @@ export default function Login() {
                 {showAlert ? (
                   <Alert
                     showIcon
-                    message="You may now login to your account"
-                    type="success"
+                    message={alertMessage}
+                    type={alertType}
                     style={{ marginBottom: "20px" }}
                     afterClose={() => {
                       setShowAlert(false);

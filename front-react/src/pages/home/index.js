@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Layout, Table } from "antd";
 import api from "../../services/api";
+import { Redirect } from "react-router";
 
 const { Content } = Layout;
 
@@ -34,6 +35,7 @@ const columns = [
 ];
 
 export default function Home() {
+  const [redirect, setRedirect] = useState(false);
   const [brews, setBrews] = useState([]);
   const [loading, setLoading] = useState(false);
   const [pagination, setPagination] = useState({
@@ -47,7 +49,6 @@ export default function Home() {
   }, []);
 
   const fetch = (pagination) => {
-    console.log(pagination);
     if (!pagination.current) pagination = pagination.pagination;
     setLoading(true);
     api
@@ -57,6 +58,11 @@ export default function Home() {
         setBrews(data);
         setLoading(false);
         setPagination(pagination);
+      })
+      .catch((e) => {
+        localStorage.clear();
+        // window.location.href = "/login";
+        setRedirect(true);
       });
   };
 
@@ -67,17 +73,23 @@ export default function Home() {
   };
 
   return (
-    <Layout>
-      <Content>
-        <Table
-          pagination={pagination}
-          loading={loading}
-          onChange={handleTableChange}
-          columns={columns}
-          dataSource={brews}
-          bordered
-        />
-      </Content>
-    </Layout>
+    <>
+      {redirect ? (
+        <Redirect to="/login" />
+      ) : (
+        <Layout>
+          <Content>
+            <Table
+              pagination={pagination}
+              loading={loading}
+              onChange={handleTableChange}
+              columns={columns}
+              dataSource={brews}
+              bordered
+            />
+          </Content>
+        </Layout>
+      )}
+    </>
   );
 }

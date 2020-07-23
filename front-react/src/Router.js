@@ -11,8 +11,8 @@ class AppRouter extends React.Component {
     return (
       <Router>
         <Switch>
-          <Route path="/" component={Home}></Route>
-          <Route path="/login" component={Login}></Route>
+          <Route exact path="/" component={Home}></Route>
+          <Route exact path="/login" component={Login}></Route>
         </Switch>
       </Router>
     );

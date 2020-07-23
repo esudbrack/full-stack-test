@@ -18,4 +18,7 @@ const Route = use("Route");
 
 // Route.on("/").render("welcome");
 Route.post("register", "UserController.register");
-Route.post("/authenticate", "UserController.authenticate");
+Route.post("authenticate", "UserController.authenticate");
+Route.group(() => {
+  Route.get("brews/:page/:per_page", "ExternalController.getBrewById");
+}).middleware("auth");

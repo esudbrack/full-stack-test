@@ -41,6 +41,7 @@ export default function Home() {
   const [pagination, setPagination] = useState({
     current: 1,
     pageSize: 10,
+    pageSizeOptions: [10, 25, 50, 80],
     total: 325, // Peguei manualmente da api, valor pode ser alterado caso adicionem mais dados
   });
 

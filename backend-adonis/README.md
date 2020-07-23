@@ -2,6 +2,41 @@
 
 Foi adotado o Adonis como framework para o back-end
 
+## Endpoints
+
+Registro de usuário
+
+```
+POST
+Form data: {
+  name: string
+  email: string
+  password: string
+}
+/register
+```
+
+Login de usuário
+
+```
+POST
+Form data: {
+  email: string
+  password: string
+}
+/authenticate
+```
+
+Retorno da Punk API (precisa do header com JWT token)
+
+```
+GET
+/brews/:page/:per_page
+
+page: número da página
+per_page: número de resultados
+```
+
 ## Setup
 
 Primeiro é preciso instalar o CLI do Adonis na linha de comando `npm i -g @adonisjs/cli` (ou use o npx)

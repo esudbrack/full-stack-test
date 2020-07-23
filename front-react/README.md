@@ -1,4 +1,8 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Introdução
+
+O projeto foi inicializado com create-react-app e foi adicionado o ant design
+
+Para rodar o projeto, primeiro dê um `yarn install`
 
 ## Available Scripts
 
